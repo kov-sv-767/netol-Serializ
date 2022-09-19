@@ -8,8 +8,8 @@ public class Main {
     public static void main(String[] args) throws IOException, ClassNotFoundException {
         Basket cart = new Basket(List.of("Хлеб", "Масло", "Молоко", "Яйца"), List.of(45, 130, 100, 120));
         System.out.println("Список доступных товаров: ");
-        for (int i = 0; i < Basket.getGoods().size(); i++) {
-            System.out.println((i + 1) + ". " + Basket.getGoods().get(i) + " по цене: " + Basket.getPrice().get(i) + " руб./ед.");
+        for (int i = 0; i < cart.getGoods().size(); i++) {
+            System.out.println((i + 1) + ". " + cart.getGoods().get(i) + " по цене: " + cart.getPrice().get(i) + " руб./ед.");
         }
 
         Scanner scanner = new Scanner(System.in);
@@ -21,11 +21,11 @@ public class Main {
             String input = scanner.nextLine();
 
             if ("end".equals(input)) {
-                for (int i = 0; i < Basket.getAllGoods().size(); i++) {
-                    if (Basket.getAllGoods().get(i) == null) {
-                        costCart = Basket.getAllGoods().get(i) * Basket.getPrice().get(i);
+                for (int i = 0; i < cart.getAllGoods().size(); i++) {
+                    if (cart.getAllGoods().get(i) == null) {
+                        costCart = cart.getAllGoods().get(i) * cart.getPrice().get(i);
                     } else {
-                        costCart += Basket.getAllGoods().get(i) * Basket.getPrice().get(i);
+                        costCart += cart.getAllGoods().get(i) * cart.getPrice().get(i);
                     }
                 }
                 cart.printCart();
@@ -33,14 +33,13 @@ public class Main {
                 break;
             }
             if ("load".equals(input)) {
-                Basket.loadFromBinFile(new File("basket.bin"));
+                cart.loadFromBinFile(new File("basket.bin"));
                 System.out.println("Информация загружена");
                 continue;
             }
             String[] parse = input.split(" ");
             if (parse.length != 2) {
                 System.out.println("Необходимо ввести 2 значения: номер товара и его количество. Вы ввели: " + parse.length);
-                continue;
             } else {
                 try {
                     int numProduct = Integer.parseInt(parse[0]) - 1;
@@ -49,7 +48,6 @@ public class Main {
                     cart.saveBin(new File("basket.bin"));
                 } catch (NumberFormatException e) {
                     System.out.println("Введены некорректные данные: необходимо ввести числовые значения");
-                    continue;
                 }
             }
         }
