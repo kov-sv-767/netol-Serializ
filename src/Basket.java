@@ -4,9 +4,9 @@ import java.util.List;
 import java.util.Map;
 
 public class Basket {
-    private static List<String> goods;
-    private static List<Integer> price;
-    private static Map<Integer, Integer> allGoods = new HashMap<>();
+    private List<String> goods;
+    private  List<Integer> price;
+    private Map<Integer, Integer> allGoods = new HashMap<>();
 
     public Basket(List<String> goods, List<Integer> price) {
         this.goods = goods;
@@ -56,7 +56,7 @@ public class Basket {
         System.out.println("Информация успешно сохранена");
     }
 
-    public static Basket loadFromTxtFile(File textFile) {
+    public Basket loadFromTxtFile(File textFile) {
         File file = new File(textFile.toURI());
         try (FileReader fileReader = new FileReader(file);) {
             BufferedReader reader = new BufferedReader(fileReader);
@@ -65,7 +65,7 @@ public class Basket {
             while (line != null) {
                 System.out.println(line);
                 String[] parse = line.split(" ");
-                allGoods.put(i, Integer.valueOf(parse[1]));
+                getAllGoods().put(i, Integer.valueOf(parse[1]));
                 i++;
                 line = reader.readLine();
             }

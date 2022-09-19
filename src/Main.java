@@ -16,8 +16,7 @@ public class Main {
         int costCart = 0;
 
         while (true) {
-            System.out.println("Введите номер товара и его количество.");
-            System.out.println("Чтобы посмотреть список выбранных товаров в корзине, введите load.");
+            System.out.println("Введите номер товара и его количество.Для просмотра корзины введите load.");
             System.out.println("По заврешении заполнения корзины и расчета стоимости покупок нажмите end.");
             String input = scanner.nextLine();
 
@@ -41,7 +40,6 @@ public class Main {
             String[] parse = input.split(" ");
             if (parse.length != 2) {
                 System.out.println("Необходимо ввести 2 значения: номер товара и его количество. Вы ввели: " + parse.length);
-                continue;
             } else {
                 try {
                     int numProduct = Integer.parseInt(parse[0]) - 1;
@@ -50,7 +48,6 @@ public class Main {
                     cart.saveTxt(new File("cart.txt"));
                 } catch (NumberFormatException e) {
                     System.out.println("Введены некорректные данные: необходимо ввести числовые значения");
-                    continue;
                 }
             }
         }
