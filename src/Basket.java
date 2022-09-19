@@ -52,13 +52,14 @@ public class Basket implements Serializable {
         out.close();
     }
 
-    public void loadFromBinFile(File file) throws IOException, ClassNotFoundException {
+    public static  void loadFromBinFile(File file) throws IOException, ClassNotFoundException {
+        Basket cart = new Basket();
         ObjectInputStream in = new ObjectInputStream(new FileInputStream(file));
         Basket inBin = (Basket) in.readObject();
-        for (int i = 0; i < getGoods().size(); i++) {
-            if (getAllGoods().get(i) != null) {
-                System.out.println(getGoods().get(i) + ": " + getAllGoods().get(i)
-                        + " ед. " + " по цене " + getPrice().get(i) + " руб./ед. ");
+        for (int i = 0; i < cart.getGoods().size(); i++) {
+            if (cart.getAllGoods().get(i) != null) {
+                System.out.println(cart.getGoods().get(i) + ": " + cart.getAllGoods().get(i)
+                        + " ед. " + " по цене " + cart.getPrice().get(i) + " руб./ед. ");
             }
         }
         in.close();
